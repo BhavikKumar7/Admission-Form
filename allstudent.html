@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Student</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .student-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .student-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            width: 300px;
+            transition: transform 0.2s ease;
+        }
+
+        .student-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .student-card h2 {
+            margin: 0 0 10px 0;
+            color: #555;
+        }
+
+        .student-card p {
+            margin: 5px 0;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .student-card p span {
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>ALL DATA</h1>
+
+    <div class="student-container" id="studentContainer"></div>
+
+    <script>
+        document.getElementsByTagName("h1")[0].innerHTML = "ALL DATA";
+
+        fetch("http://localhost:3000")
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+
+                const studentContainer = document.getElementById('studentContainer');
+
+                data.forEach(person => {
+                    const studentCard = document.createElement('div');
+                    studentCard.className = 'student-card';
+
+                    studentCard.innerHTML = `
+                        <h2>${person.name} ${person.lname}</h2>
+                        <p><span>Gender:</span> ${person.gender}</p>
+                        <p><span>Email:</span> ${person.email}</p>
+                        <p><span>Date of Birth:</span> ${person.dob}</p>
+                        <p><span>Place:</span> ${person.place}</p>
+                        <p><span>Father's Name:</span> ${person.fname}</p>
+                        <p><span>Mother's Name:</span> ${person.mname}</p>
+                        <p><span>Rationality:</span> ${person.rationality}</p>
+                        <p><span>Religion:</span> ${person.religion}</p>
+                        <p><span>Resident:</span> ${person.resident}</p>
+                        <p><span>Married:</span> ${person.married}</p>
+                        <p><span>Address:</span> ${person.address}</p>
+                        <p><span>City:</span> ${person.city}</p>
+                        <p><span>State:</span> ${person.state}</p>
+                        <p><span>Pincode:</span> ${person.pincode}</p>
+                        <p><span>Country:</span> ${person.country}</p>
+                        <p><span>Phone:</span> ${person.phone}</p>
+                        <p><span>Emergency Phone:</span> ${person.emergencyphone}</p>
+                    `;
+
+                    studentContainer.appendChild(studentCard);
+                });
+            });
+    </script>
+</body>
+
+</html>
